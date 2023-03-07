@@ -35,7 +35,7 @@ Feature: Library app login feature
     Examples:
       | librarian username  | librarian password |
       | librarian43@library | libraryUser        |
-  @wip
+
   Scenario Outline: Login as student
     When user enters username "<student username>" and password "<student password>"
     Then user should see the dashboard
