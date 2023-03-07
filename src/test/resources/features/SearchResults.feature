@@ -1,4 +1,4 @@
-@wip
+@smoke
 Feature: Data table task
   Scenario: Table columns names
     Given I am on the login page
