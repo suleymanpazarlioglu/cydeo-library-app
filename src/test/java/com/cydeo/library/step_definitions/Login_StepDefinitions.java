@@ -7,6 +7,8 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Login_StepDefinitions {
 
@@ -26,7 +28,10 @@ public class Login_StepDefinitions {
     }
     @Then("user should see the dashboard")
     public void user_should_see_the_dashboard1() {
-        Assert.assertTrue(Driver.getDriver().getTitle().contains("Dashboard"));
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+        wait.until(ExpectedConditions.titleIs("Library"));
+        Assert.assertEquals("Library",Driver.getDriver().getTitle());
+        Driver.closeDriver();
     }
 
     @When("user enters student username")
@@ -37,6 +42,16 @@ public class Login_StepDefinitions {
     @When("user enters student password")
     public void user_enters_student_password() {
         loginPage.password.sendKeys(ConfigurationReader.getProperty("student.password"));
+        loginPage.signInButton.click();
+    }
+
+    @When("user enters username {string}")
+    public void user_enters_username(String username) {
+        loginPage.email.sendKeys(username);
+    }
+    @When("user enters password {string}")
+    public void user_enters_password(String password) {
+        loginPage.password.sendKeys(password);
         loginPage.signInButton.click();
     }
 
